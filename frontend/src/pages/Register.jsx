@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
+import { registerUser } from "../api";
 
 const Register = () => {
   const [email, setEmail] = useState("");
@@ -10,7 +11,9 @@ const Register = () => {
   const handleRegister = async (e) => {
     e.preventDefault();
     try {
-        
+      await registerUser(email, password);
+      alert("Registration successful!");
+      navigate("/login");
     } catch (err) {
       setMsg(err.response?.data?.message || "Registration failed");
     }

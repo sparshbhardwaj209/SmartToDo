@@ -1,16 +1,23 @@
 import React, { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
+import { loginUser } from "../api";
 
 const Login = () => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [msg, setMsg] = useState("");
+  const navigate = useNavigate();
 
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-    const [msg, setMsg] = useState('');
-    const navigate = useNavigate();
-
-    const handleLogin = async (e) =>{
-
+  const handleLogin = async (e) => {
+    e.preventDefault();
+    try {
+      await loginUser(email, password);
+      alert("login successfull");
+      navigate("/dashboard");
+    } catch (err) {
+      console.log(err.message);
     }
+  };
 
   return (
     <div className="flex items-center justify-center min-h-screen bg-gray-100">
