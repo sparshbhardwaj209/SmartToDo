@@ -51,3 +51,22 @@ exports.updateTodo = async (req, res) => {
     res.status(500).json({ message: "Server error" });
   }
 };
+
+// delete a todo
+
+exports.deleteTodo = async (req, res) => {
+  const { id } = req.params;
+  try {
+    const todo = await Todo.findOneAndDelete({
+      _id: id,
+      user: req.user.id,
+    });
+    if (!todo) {
+      return res.status(404).json({ message: "Todo not found" });
+    }
+    res.json({ message: "Todo deleted successfully" });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: "Server error" });
+  }
+};
