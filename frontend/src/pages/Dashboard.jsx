@@ -64,10 +64,10 @@ const Dashboard = () => {
 
   return (
     <>
-      <div className="p-4 bg-gray-100 min-h-screen">
-        <div className="max-w-xl mx-auto bg-white p-4 rounded shadow">
+      <div className="p-4 bg-[#242424] min-h-screen">
+        <div className="max-w-xl mx-auto bg-[#1a1a1a] p-4 rounded shadow">
           <div className="flex justify-between mb-4">
-            <h1 className="text-2xl font-bold">Dashboard</h1>
+            <h1 className="text-2xl font-bold text-[#e3e3e3]">Dashboard</h1>
             <button
               onClick={logout}
               className="bg-red-500 text-white px-3 py-1 rounded"
@@ -76,7 +76,7 @@ const Dashboard = () => {
             </button>
           </div>
           {msg && <p className="text-red-500 mb-2">{msg}</p>}
-          <form onSubmit={handleAddTodo} className="flex mb-4">
+          <form onSubmit={handleAddTodo} className="flex mb-4 gap-2 text-white">
             <input
               type="text"
               placeholder="Add a todo"
@@ -95,7 +95,7 @@ const Dashboard = () => {
             {todos.map((todo) => (
               <li
                 key={todo._id}
-                className="flex justify-between items-center border-b p-2"
+                className="flex justify-between items-center border-b p-2 text-[#e3e3e3]"
               >
                 <span
                   onClick={() => handleToggle(todo._id, todo.completed)}
