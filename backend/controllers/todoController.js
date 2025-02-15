@@ -3,7 +3,7 @@ const Todo = require("../models/Todo");
 // get all todos
 exports.getTodos = async (req, res) => {
   try {
-    const todos = await Todo.find({ user: req.user.id }).sort({
+    const todos = await Todo.find({ user: req.user.userId }).sort({
       createdAt: -1,
     });
     res.json(todos);
@@ -19,7 +19,7 @@ exports.createTodo = async (req, res) => {
   try {
     const newTodo = new Todo({
       text,
-      user: req.user.id,
+      user: req.user.userId,
     });
     await newTodo.save();
     res.status(201).json(newTodo);
@@ -53,13 +53,12 @@ exports.updateTodo = async (req, res) => {
 };
 
 // delete a todo
-
 exports.deleteTodo = async (req, res) => {
   const { id } = req.params;
   try {
     const todo = await Todo.findOneAndDelete({
       _id: id,
-      user: req.user.id,
+      user: req.user.userId,
     });
     if (!todo) {
       return res.status(404).json({ message: "Todo not found" });

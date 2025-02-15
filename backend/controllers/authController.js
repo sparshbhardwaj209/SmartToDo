@@ -46,9 +46,7 @@ exports.login = async (req, res) => {
     }
 
     // if password matched then creating a token
-    const token = jwt.sign({ userId: user._id }, JWT_SECRET, {
-      expiresIn: "1h",
-    });
+    const token = jwt.sign({ userId: user._id }, JWT_SECRET);
 
     res.status(200).json({
       message: "User logged in successfully",
